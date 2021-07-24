@@ -668,7 +668,7 @@ extension DropDown {
 		guard let window = UIWindow.visibleWindow() else { return (0, 0, 0, 0, 0, false, direction) }
 
 		barButtonItemCondition: if let anchorView = anchorView as? UIBarButtonItem {
-			let isRightBarButtonItem = anchorView.plainView.frame.minX > window.frame.midX
+            let isRightBarButtonItem = anchorView.plainView.convert(anchorView.plainView.bounds, to: nil).minX > window.frame.midX
 
 			guard isRightBarButtonItem else { break barButtonItemCondition }
 
@@ -771,7 +771,8 @@ extension DropDown {
 		for index in 0..<dataSource.count {
 			configureCell(templateCell, at: index)
 			templateCell.bounds.size.height = cellHeight
-			let width = templateCell.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).width
+            let width = templateCell.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).width > (self.frame.width * 0.95) ?
+                self.frame.width * 0.95 : templateCell.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).width
 			
 			if width > maxWidth {
 				maxWidth = width
