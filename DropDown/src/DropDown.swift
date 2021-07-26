@@ -676,7 +676,7 @@ extension DropDown {
 			let anchorViewWidth = anchorView.plainView.frame.width
 			let x = -(width - anchorViewWidth)
 
-			bottomOffset = CGPoint(x: x, y: 0)
+            bottomOffset.x = x
 		}
 		
 		if anchorView == nil {
